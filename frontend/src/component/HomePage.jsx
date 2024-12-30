@@ -6,7 +6,7 @@ const HomePage = () => {
   const navigate = useNavigate();
   return (
     <div className="home">
-      <h1>Welcome to the HRMS Dashboard pleas continue</h1>
+      <h1>Welcome to the HRMS Dashboard</h1>
       <button className="homebtn" onClick={() => navigate("/login")}>
         Login
       </button>
