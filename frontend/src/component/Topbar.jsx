@@ -11,7 +11,7 @@ const Topbar = () => {
         <button className="icon-btn">🔔</button>
         <div className="user-profile">
           <img
-            src="https://via.placeholder.com/40"
+            src="my pic.jpg"
             alt="User"
             className="profile-pic"
           />

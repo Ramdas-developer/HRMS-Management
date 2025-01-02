@@ -169,7 +169,7 @@ table th {
   color: white;
   font-weight: 550;
   width: 100%;
-  max-width: 200px;
+  max-width: 200px; 
 }
 
 .button-addcandidate:hover {
@@ -239,5 +239,9 @@ table th {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 40px;
   margin-top: 0px;
-  margin-left: -35px;
+  margin-left: -80px;
+}
+
+.logo{
+  border: 5px solid black ;
 }

@@ -1,16 +1,28 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 const SideBar = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleLogoClick = () => {
+    if (location.pathname !== "/dashboard") {
+      navigate("/dashboard");
+    }
+  };
+
+  const handleLogout = () =>{
+    if(location.pathname !== "/login"){
+      navigate('/login')
+    }
+  }
+
   return (
-    
     <aside className="sidebar">
       <div className='logo-container'>
-         <img src="/Hrms logo.webp" alt="logo"  className='logo'/>
+      <img src="/Hrms logo.webp" alt="logo"  className='logo' onClick={handleLogoClick} style={{cursor:"pointer"}} />
+         
       </div>
-      {/* <h1 className="logo-title">
-        <Link to="" style={{textDecoration:'none', color:'#6c63ff'}}>HRMS Dashboard</Link>
-      </h1> */}
       <nav>
         <p>Recruitment</p> 
         <ul>
@@ -29,7 +41,7 @@ const SideBar = () => {
         <p>Others</p>
         <ul>
           <li>
-            <Link to="login" style={{textDecoration:'none', color:'black'}}>Log out</Link>
+            <Link to="login" style={{textDecoration:'none', color:'black'}} onClick={handleLogout}>Log out</Link>
           </li>
         </ul>
       </nav>
