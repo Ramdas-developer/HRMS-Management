@@ -28,6 +28,24 @@ const Employee = () => {
     }
   }
 
+  const DeleteEmployee = async(id) =>{
+    const confirmDelete = window.confirm("Are you sure you want to delete this employee?");
+    if (!confirmDelete) return;
+
+    try {
+      const response = await axios.delete(`${BackendUrl}/deleteEmployee/${id}`);
+      console.log("response ------------------------",response)
+      if(response.status === 200){
+        alert("Employee deleted Successfully!")
+        setEmployee((prevEmployees)=>prevEmployees.filter((employee)=>employee._id !== id));
+        setFilteredEmployee((prevFilters)=>prevFilters.filter((employee)=>employee._id !== id))
+      }
+    } catch (error) {
+      console.error("Error deleting employee:", error);
+      alert("Failed to delete employee. Please try again."); 
+    }
+  }
+
   useEffect(()=>{
     AllEmployee()
   },[]);
@@ -39,7 +57,7 @@ const Employee = () => {
 
      const filter = employees.filter((person)=> person.name.toLowerCase().includes(query) || person.email.toLowerCase().includes(query) || person.position.toLowerCase().includes(query) || person.department.toLowerCase().includes(query) || person.dateofJoining.toLowerCase().includes(query)|| String(person.phone).includes(query));  
      setFilteredEmployee(filter)                                           
-  }          
+  }   
     
   return (
     <div><div className="candidates">
@@ -76,7 +94,7 @@ const Employee = () => {
             <td>{new Date(employee.dateofJoining).toISOString().split("T")[0]}</td>
             <td className='editdelete-btn'>
                 <button className='editEmployee-btn'>Edit</button>
-                <button className='deleteEmployee-btn'>Delete</button>
+                <button className='deleteEmployee-btn' onClick={() => DeleteEmployee(employee._id)}>Delete</button>
             </td>   
         </tr>
         ))}

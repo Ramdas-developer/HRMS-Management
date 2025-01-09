@@ -17,6 +17,14 @@ const router = createBrowserRouter([
     element: <HomePage />,
   },
   {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <RegisterPage />,
+  },
+  {
     path: "/dashboard",
     element: <Dashboard />,
     children: [
@@ -49,14 +57,6 @@ const router = createBrowserRouter([
         element: <Employee />,
       },
     ],
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/register",
-    element: <RegisterPage />,
   },
 
   { path: "*", element: <div>not found</div> },

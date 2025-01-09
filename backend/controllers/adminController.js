@@ -2,7 +2,7 @@ const Admin = require("../modals/adminModel");
 
 const SignUp = async (req, res) => {
     try {
-      const { name, email, phone, password } = req.body;
+      const { name, email, phone, password } = req.body; 
       console.log("req.body", req.body);
   
       const data = await Admin.create({
@@ -38,6 +38,7 @@ const SignUp = async (req, res) => {
         const user = await Admin.findOne({email});
         if(!user){
             res.status(404).json({message:"User not found for Login Please check email and password"});
+            return;
         }
         res.status(200).json({message:"Login Successfull",User:user});
     } catch (error) {

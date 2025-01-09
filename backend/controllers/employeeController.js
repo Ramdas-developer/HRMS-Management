@@ -37,4 +37,49 @@ const CreateEmployee = async (req, res) => {
       }
   }
 
-module.exports = {CreateEmployee, AllEmployee}; 
+  const DeleteEmployee = async(req,res) =>{
+    try {
+      const userId = req.params.id;
+      const user = await Employee.findByIdAndDelete(userId);
+      if(!user){
+        res.status(404).json({message:"User not Found!"});
+      }
+      console.log("deleteUser:",user);     
+      res.status(200).json({message:"Employee successfully deleted!",delete_user:user});
+    } catch (error) {
+      res.status(500).json({message:"Internal Server Error",Error:error.message});
+      console.error("Internal Server error :",error); 
+    }
+  }
+
+  const UpdateEmployee = async(req,res) =>{
+    try {
+      const userId = req.params.id;
+      const user = await Employee.findByIdAndUpdate(userId,
+        {
+          $set:{
+            name:req.body.name,
+            email:req.body.email,
+            phone:req.body.phone,
+            position:req.body.position,
+            department:req.body.department
+          }
+        },{new:true},
+        console.log("name :",    req.body.name),
+        console.log("email :",   req.body.email),
+        console.log("phone :",   req.body.phone),
+        console.log("position :",req.body.position),
+        console.log("department :",req.body.department) 
+      );
+      if(!user){
+        res.status(404).json({message:"User not found!"})
+      }
+      res.status(200).json({message:"Employee updated successfully!",updateUser:user});
+  
+    } catch (error) {
+      console.log("Internal Server error:", error);
+      res.status(500).json({message:"Internal Server Error",Error:error.message});
+    }
+  }
+
+module.exports = {CreateEmployee, AllEmployee, DeleteEmployee,UpdateEmployee}; 

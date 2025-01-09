@@ -188,6 +188,9 @@ table th {
   color: white;
   width: 70px;
 }
+.editEmployee-btn:hover{
+  background-color:#dd972d ;
+}
 
 .deleteEmployee-btn {
   border: 2px solid black;
@@ -196,7 +199,9 @@ table th {
   color: white;
   width: 70px;
 }
-
+.deleteEmployee-btn:hover {
+  background-color: #b60c0c;
+}
 .dashboard-overview {
   display: flex;
   gap: 20px;

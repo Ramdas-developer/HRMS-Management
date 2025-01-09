@@ -29,8 +29,8 @@ const CreateCandidate = async (req, res) => {
 const AllCandidate = async(req,res) => {
     try {
         const candidates = await Candidate.find();
-        res.status(200).json({message: "New candidate show Successfully",All_candidate: candidates}); 
         console.log("all candidate:", candidates)
+        res.status(200).json({message: "New candidate show Successfully",All_candidate: candidates}); 
     } catch (error) {
         console.log("error :", error);
         res.status(500).json({ message: "Internal network Error", Error: error.message });
