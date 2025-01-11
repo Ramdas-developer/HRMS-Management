@@ -11,9 +11,9 @@ const Candidate = () => {
   const [searchQuery, setSearchQuery] = useState();
   const [FilteredCandidate, setFilteredCandidate] = useState([]);
 
-  const AllCandidate = async () => {
+  const AllCandidate = async (page = 1) => {
     try {
-      const response = await axios.get(`${BackendUrl}/allcandidate`);
+      const response = await axios.get(`${BackendUrl}/allcandidate?page=${page}&limit=10`);
       console.log("Response :", response);
       console.log("api Response :", response.data);
 
@@ -77,12 +77,6 @@ const Candidate = () => {
     <div className="candidates">
       <div className="filters">
         <h2>Candidate</h2>
-        {/* <select>
-          <option>All</option>
-          <option>New</option>
-          <option>Selected</option>
-          <option>Rejected</option>
-        </select> */}
         <select>
           <option>All</option>
           <option>Fresher</option>
@@ -114,29 +108,19 @@ const Candidate = () => {
             <th>Phone Number</th>
             <th>Profile</th>
             <th>Experience</th>
-            {/* <th>Status</th> */}
             <th>Resume</th>
           </tr>
         </thead>
         <tbody>
           {FilteredCandidate &&
             FilteredCandidate.map((candidate, index) => (
-              <tr key={candidate.id}>
+              <tr key={candidate._id || index}>
                 <td>{index + 1}</td>
                 <td>{candidate.name}</td>
                 <td>{candidate.email}</td>
                 <td>{candidate.phone}</td>
                 <td>{candidate.position}</td>
                 <td>{candidate.experience}</td>
-                {/* <td>
-                  <select>
-                    <option>{candidate.status}</option>
-                    <option>New</option>
-                    <option>Scheduled</option>
-                    <option>Selected</option>
-                    <option>Rejected</option>
-                  </select>
-                </td> */}
                 <td>
                   <button
                     className="download-btn"

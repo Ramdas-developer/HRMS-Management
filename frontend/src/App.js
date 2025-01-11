@@ -10,6 +10,7 @@ import DashboardDetails from "./pages/dashboard/DashboardDetails";
 import AddEmployee from "./pages/employee/AddEmployee";
 import AddCandidate from "./pages/candidate/AddCandidate";
 import Candidate from "./pages/candidate/Candidate";
+import Attendance from "./pages/attendance/Attendance";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,11 @@ const router = createBrowserRouter([
       {
         path: "employees",
         element: <Employee />,
+      },
+
+      {
+        path: "attendance",
+        element: <Attendance />,
       },
     ],
   },

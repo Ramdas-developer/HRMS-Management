@@ -7,15 +7,15 @@ const Topbar = () => {
         <h1 className="topbar-title">HRMS Management</h1>
       </div>
       <div className="topbar-icons">
-        <button className="icon-btn">📧</button>
-        <button className="icon-btn">🔔</button>
+        {/* <button className="icon-btn">📧</button>
+        <button className="icon-btn">🔔</button> */}
         <div className="user-profile">
           <img
             src="my pic.jpg"
             alt="User"
             className="profile-pic"
           />
-          <button className="dropdown-btn">▼</button>
+          {/* <button className="dropdown-btn">▼</button> */}
         </div>
       </div>
     </div>

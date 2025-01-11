@@ -12,12 +12,11 @@ const SideBar = () => {
   };
 
   const handleLogout = () => {
-    if(location.pathname !== "/login"){
+    if (location.pathname !== "/login") {
       const confirmLogout = window.confirm("Are you sure you want to logout?");
-      if (confirmLogout){
-        navigate("/login")
-      }else return;
-  
+      if (confirmLogout) {
+        navigate("/login");
+      } else return;
     }
   };
 
@@ -54,7 +53,14 @@ const SideBar = () => {
               Employees
             </Link>
           </li>
-          <li>Attendance</li>
+          <li>
+            <Link
+              to="attendance"
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              Attendance
+            </Link>
+          </li>
           <li>Leaves</li>
         </ul>
         <p>Others</p>

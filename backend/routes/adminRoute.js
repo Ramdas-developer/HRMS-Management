@@ -19,7 +19,7 @@ adminRoute.get('/download/:id', DownloadResume)
 adminRoute.post('/addemployee',CreateEmployee)   
 adminRoute.get('/allemployee',AllEmployee)
 adminRoute.delete('/deleteEmployee/:id',DeleteEmployee);
-adminRoute.update('/updateEmployee/:id',UpdateEmployee)
+adminRoute.put('/updateEmployee/:id',UpdateEmployee)
 
 
 module.exports = adminRoute; 
