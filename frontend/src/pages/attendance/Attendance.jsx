@@ -5,12 +5,15 @@ import "../cssFiles/attendance.css";
 const Attendance = () => {
   const [employee, setEmployee] = useState([]);
   const [status, setStatus] = useState();
+  const [searchQuery, setSearchQuery] = useState();
+  const [FilteredEmployee, setFilteredEmployee] = useState([]);
 
   const BackendUrl = process.env.REACT_APP_BACKEND_URL;
   const EmployeeAttendance = async () => {
     try {
       const response = await axios.get(`${BackendUrl}/allemployee`);
       setEmployee(response.data.All_Employee);
+      setFilteredEmployee(response.data.All_Employee);
 
       const initialStatus = {};
       response.data.All_Employee.forEach((candidate) => {
@@ -22,6 +25,7 @@ const Attendance = () => {
     } catch (error) {
       console.log("Error fetching candidate :", error);
       setEmployee([]);
+      setFilteredEmployee([]);
     }
   };
 
@@ -43,6 +47,36 @@ const Attendance = () => {
       fontWeight: "bold",
     };
   };
+
+  const handleSearch = (e) =>{
+    const Query = e.target.value.toLowerCase();
+    setSearchQuery(Query);
+    console.log("Query :",Query)
+
+    const filtered = employee.filter((person)=>person.name.toLowerCase().includes(Query) || person.email.toLowerCase().includes(Query) || person.position.toLowerCase().includes(Query) || person.department.toLowerCase().includes(Query));
+    setFilteredEmployee(filtered);
+    console.log("filteredEmployee :",filtered);
+  };
+
+  const DeleteEmployee = async(id)=>{
+    const confirmDelete = window.confirm("Are you sure you want to delete this employee?");
+    if (!confirmDelete) return;
+
+    try {
+      const response = await axios.delete(`${BackendUrl}/deleteEmployee/${id}`);
+      console.log("response of delete :",response);
+
+      if(response.status === 200){
+         alert("Employee Deleted Succesfully.");
+         setEmployee((prevEmployees)=>prevEmployees.filter((employee)=>employee._id !== id));
+         setFilteredEmployee((prevFilters)=>prevFilters.filter((one)=>one._id !== id));
+      }
+    } catch (error) {
+      console.error("Error deleting employee:", error);
+      alert("Failed to delete employee. Please try again."); 
+    }
+  }
+
   return (
     <div className="candidates">
       <div className="filters">
@@ -57,8 +91,8 @@ const Attendance = () => {
             className="candidate-search"
             type="text"
             placeholder="Search"
-            // value={searchQuery}
-            // onChange={handleSearch}
+            value={searchQuery}
+            onChange={handleSearch}
           />
           {/* <button
             className="button-addcandidate"
@@ -74,6 +108,7 @@ const Attendance = () => {
           <tr>
             <th>Sr. no.</th>
             <th>Employee Name</th>
+            <th>Email Id</th>
             <th>Position</th>
             <th>Department</th>
             <th>Status</th>
@@ -81,10 +116,11 @@ const Attendance = () => {
           </tr>
         </thead>
         <tbody>
-          {employee.map((candidate, index) => (
+          {FilteredEmployee && FilteredEmployee.map((candidate, index) => (
             <tr key={candidate._id || index}>
               <td>{index + 1}</td>
               <td>{candidate.name}</td>
+              <td>{candidate.email}</td>
               <td>{candidate.position}</td>
               <td>{candidate.department}</td>
               <td>
@@ -97,7 +133,7 @@ const Attendance = () => {
               </td>
               <td className='editdelete-btn'>
                 <button className='editEmployee-btn'>Edit</button>
-                <button className='deleteEmployee-btn' >Delete</button>
+                <button className='deleteEmployee-btn' onClick={()=>DeleteEmployee(employee._id)} >Delete</button>
             </td> 
             </tr>
           ))}
