@@ -14,7 +14,7 @@ const CreateEmployee = async (req, res) => {
         email: email,
         phone: phone,
         position: position,
-        department: department,
+        department: department, 
       });
 
       console.log("data :", data);
@@ -45,7 +45,7 @@ const CreateEmployee = async (req, res) => {
         res.status(404).json({message:"User not Found!"});
       }
       console.log("deleteUser:",user);     
-      res.status(200).json({message:"Employee successfully deleted!",delete_user:user});
+      res.status(200).json({message:"Employee successfully deleted!",delete_user:user}); 
     } catch (error) {
       res.status(500).json({message:"Internal Server Error",Error:error.message});
       console.error("Internal Server error :",error); 
