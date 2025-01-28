@@ -26,13 +26,7 @@ const AddEmployee = () => {
           phone: data.phone,
           position: data.position,
           department: data.department,
-        }
-        // {
-        //   headers: {
-        //     "Content-Type": "multipart/form-data",
-        //   },
-        // }
-      );
+        });
 
       console.log("Response:", response);
       console.log("Employee_details:", response.data);

@@ -16,7 +16,7 @@ const SignUp = async (req, res) => {
         res.status(400).json({message:"Email Id is same.Please try another Email Id"})
       }
       console.log("data :", data);
-      res.status(200).json({message:"Admin register Succesfully Please login now",Admin_Detail:data}); 
+      res.status(200).json({message:"Admin register Succesfully Please login now",Admin_Detail:data});   
     } catch (error) {
         res.status(400).json({message:"Admin not register",Error:error.message}) 
     }
