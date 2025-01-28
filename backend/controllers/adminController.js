@@ -2,8 +2,14 @@ const Admin = require("../modals/adminModel");
 
 const SignUp = async (req, res) => {
     try {
-      const { name, email, phone, password } = req.body; 
+      const { name, email, phone, password } = req.body;  
       console.log("req.body", req.body);
+
+      const existingAdmin = await Admin.findOne({ email });
+
+    if (existingAdmin) {
+      return res.status(400).json({ message: "Email Id is same. Please try another Email Id" });
+    }
   
       const data = await Admin.create({
         name: name,
@@ -11,14 +17,10 @@ const SignUp = async (req, res) => {
         phone: phone,
         password: password,
       });
-
-      if(email === data.email){
-        res.status(400).json({message:"Email Id is same.Please try another Email Id"})
-      }
       console.log("data :", data);
-      res.status(200).json({message:"Admin register Succesfully Please login now",Admin_Detail:data});   
+      res.status(200).json({message:"User register Succesfully Please login now.",Admin_Detail:data});    
     } catch (error) {
-        res.status(400).json({message:"Admin not register",Error:error.message}) 
+        res.status(400).json({message:"User not register",Error:error.message}) 
     }
   };
 

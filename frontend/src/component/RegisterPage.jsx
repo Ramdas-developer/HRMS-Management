@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../pages/cssFiles/register.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -8,6 +8,7 @@ console.log(backendUrl, "url backend");
 
 const RegisterPage = () => {
   const navigate = useNavigate();
+  const[errorMessage, setErrorMessage] = useState('');
   const {
     register,
     handleSubmit,
@@ -19,17 +20,20 @@ const RegisterPage = () => {
   const onSubmit = async (data) => {
     try {
       const response = await axios.post(`${backendUrl}/signup`, data);
-      if (response.status === 200) {
+      if(response.status === 200) {
         alert(response.data.message);
-      } else {
-        alert(response.data.message || "Something went wrong");
-      }
-      navigate('/login');
+        navigate('/login');
+      } 
       console.log("response", response);
       console.log("admin details:", response.data)
     } catch (error) {
       console.error("Error:", error);
-      alert("An error occurred while registering the admin");
+      if(error.response && error.response.status === 400){
+        setErrorMessage(error.response.data.message)
+        alert(errorMessage)
+      }else{
+        setErrorMessage("An error occurred while registering the User.");
+      }
     }
   };
 
@@ -39,6 +43,7 @@ const RegisterPage = () => {
         <div className="auth-form-section">
           <form className="auth-form" onSubmit={handleSubmit(onSubmit)}>
             <h2>HRMS Signup</h2>
+            {/* {errorMessage && <p className="error-message">{errorMessage}</p>} */}
 
             <div className="form-group">
               <label htmlFor="name">Full name</label>
