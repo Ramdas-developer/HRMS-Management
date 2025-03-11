@@ -19,6 +19,10 @@ const Login = () => {
         { email, password }
       );
       alert("Login successful!");
+
+      localStorage.setItem("token", response.data.token);
+      console.log('JWT token', response.data.token);
+
       navigate("/dashboard");
       console.log("login successful :", response.data);
       console.log("response", response);

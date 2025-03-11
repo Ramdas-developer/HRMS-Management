@@ -11,7 +11,7 @@ import AddEmployee from "./pages/employee/AddEmployee";
 import AddCandidate from "./pages/candidate/AddCandidate";
 import Candidate from "./pages/candidate/Candidate";
 import Attendance from "./pages/attendance/Attendance";
-
+ 
 const router = createBrowserRouter([
   {
     path: "/",
