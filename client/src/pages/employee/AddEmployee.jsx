@@ -1,49 +1,60 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../cssFiles/addCandidate.css";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-// import { useNavigate } from "react-router-dom";
 
-const AddEmployee = () => {
-  // const navigate = useNavigate();
+const AddEmployee = ({employee, onClose}) => {
 
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
     reset,
   } = useForm();
 
   const BackendUrl = process.env.REACT_APP_BACKEND_URL;
 
-  const onSubmit = async (data) => {
-    try {
-      const response = await axios.post(
-        `${BackendUrl}/addemployee`,
-        {
-          name: data.name,
-          email: data.email,
-          phone: data.phone,
-          position: data.position,
-          department: data.department,
-        });
 
+  const onSubmit = async (data) => {
+    console.log("data------>",data)
+    try {
+      let response;
+      if(employee){
+        console.log("employee------->",employee)
+        console.log("employee id------->",employee._id)
+        response = await axios.put(`${BackendUrl}/updateEmployee/${employee._id}`, data);
+        alert("Employee updated Successfully!");
+      }else{
+        response = await axios.post(`${BackendUrl}/addemployee`, data);
+        alert("Employee added successfully!");
+      }
+      
       console.log("Response:", response);
       console.log("Employee_details:", response.data);
-      alert("Employee added successfully!");
-
-      // Reset the form after successful submission
-      reset();
-      // navigate("")
+      onClose();
+      
     } catch (error) {
       console.error("Error:", error.response?.data || error.message);
-      alert("Failed to add candidate. Please try again.");
+      alert("Failed to edit Employee. Please try again.");
     }
   };
 
+  useEffect(()=>{
+    if(employee){
+      setValue("name", employee.name);
+      setValue("email", employee.email);
+      setValue("phone", employee.phone);
+      setValue("position", employee.position);
+      setValue("department", employee.department);
+    }else{
+      reset();
+    }
+  },[employee,setValue]);
+
   return (
     <div className="add-candidate-modal">
-      <h2 className="modal-header">Add New Candidate</h2>
+      <h2 className="modal-header">{employee ? "Edit Employee" : "Add New Candidate"}</h2>
       <form className="add-candidate-form" onSubmit={handleSubmit(onSubmit)}>
         <div className="form-row">
           <div className="input-group">
@@ -141,7 +152,7 @@ const AddEmployee = () => {
         </div>
 
         <button type="submit" className="save-btn">
-          Save
+          { employee ? "update" : "Save"}
         </button>
       </form>
     </div>

@@ -11,6 +11,10 @@ import AddEmployee from "./pages/employee/AddEmployee";
 import AddCandidate from "./pages/candidate/AddCandidate";
 import Candidate from "./pages/candidate/Candidate";
 import Attendance from "./pages/attendance/Attendance";
+import Leaves from "./pages/leave/Leaves";
+import "bootstrap/dist/css/bootstrap.min.css";
+
+
  
 const router = createBrowserRouter([
   {
@@ -61,6 +65,11 @@ const router = createBrowserRouter([
       {
         path: "attendance",
         element: <Attendance />,
+      },
+
+      {
+        path: "leave",
+        element: <Leaves/>
       },
     ],
   },

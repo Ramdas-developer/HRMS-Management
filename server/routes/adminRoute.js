@@ -19,8 +19,8 @@ adminRoute.get('/download/:id', DownloadResume)
 // employee
 adminRoute.post('/addemployee', CreateEmployee)   
 adminRoute.get('/allemployee', AllEmployee)
-adminRoute.delete('/deleteEmployee/:id', authMiddleware, DeleteEmployee);
-adminRoute.put('/updateEmployee/:id', authMiddleware, UpdateEmployee)
+adminRoute.delete('/deleteEmployee/:id', DeleteEmployee);
+adminRoute.put('/updateEmployee/:id', UpdateEmployee)
 
 
 module.exports = adminRoute; 

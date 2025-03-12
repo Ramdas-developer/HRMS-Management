@@ -1,4 +1,5 @@
 const Employee = require("../modals/employeeModel");
+const mongoose = require("mongoose");
 
 const CreateEmployee = async (req, res) => {
     try {
@@ -55,13 +56,23 @@ const CreateEmployee = async (req, res) => {
   const UpdateEmployee = async(req,res) =>{
     try {
       const userId = req.params.id;
+      console.log("userid------>",userId)
+
+      if (!userId) {
+        return res.status(400).json({ message: "Employee ID is required." });
+      }
+
+      if (!mongoose.Types.ObjectId.isValid(userId)) {
+        return res.status(400).json({ message: "Invalid Employee ID format." });
+      }
+
       const user = await Employee.findByIdAndUpdate(userId,
         {
           $set:{
             name:req.body.name,
             email:req.body.email,
             phone:req.body.phone,
-            position:req.body.position,
+            position:req.body.position,  
             department:req.body.department
           }
         },{new:true},

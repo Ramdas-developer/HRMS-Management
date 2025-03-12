@@ -29,19 +29,23 @@
 
 .sidebar nav ul li.active,
 .sidebar nav ul li:hover {
-  background-color: #8d89e1;
-  padding-left: 10px;
+  background-color: #c089fa;
+  /* padding-left: 10px; */
   border-radius: 10px;
+  color:#7017cf;
+  font-size: large;
+  /* text-decoration: 4px purple underline; */
 }
 
 li {
   padding: 8px;
   font-size: 17px;
+  font-weight:500;
 }
 
 p {
   margin: 10px;
-  color: #827ceb;
+  color: #7919df;
   font-weight: 700;
   font-size: large;
 }
@@ -121,8 +125,13 @@ p {
 .filters select,
 .filters input {
   padding: 9px;
-  border: 1px solid #ccc;
+  border: 1px solid #9b07d5;
   border-radius: 20px;
+}
+
+.filters select:hover,
+.filters input :hover{
+  border: 2px solid #6207a7;
 }
 
 table {
@@ -140,9 +149,9 @@ table td {
   text-align: left;
   border-bottom: 1px solid #ddd;
 }
-
+ 
 table th {
-  background-color: #6c63ff;
+  background-color: #7919df;
   color: white;
 }
 
@@ -165,7 +174,7 @@ table th {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 25px;
-  background-color: #7744d5;
+  background-color: #7919df;
   color: white;
   font-weight: 550;
   width: 100%;
@@ -173,12 +182,16 @@ table th {
 }
 
 .button-addcandidate:hover {
-  background-color: #622bc8;
+  background-color: #6207a7;
   cursor: pointer;
 }
 
 .candidate-search {
   border: 2px solid red;
+}
+
+.candidate-search:hover{
+  border: 2px solid #6207a7 ;
 }
 
 .editEmployee-btn {

@@ -42,9 +42,11 @@
     margin-bottom: 15px;
   }
   
-  label {
-    font-size: 14px;
-    color: #333;
+  .form-group label {
+    display: block;  
+    text-align: left; 
+    font-weight: 600; 
+    margin-bottom: 5px; 
   }
   
   input {

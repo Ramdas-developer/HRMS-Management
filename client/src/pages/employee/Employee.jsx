@@ -6,11 +6,12 @@ import { Modal } from 'react-bootstrap';
 import AddEmployee from './AddEmployee';
 
 const Employee = () => {
-  const [employees, setEmployee] = useState([]);
+  const [employee, setEmployee] = useState([]);
   const [showModel, setShowModel] = useState();
   const [searchQuery, setSearchQuery] = useState();
   const [FilteredEmployee, setFilteredEmployee] = useState([]);
-
+  const [editingEmployee, setEditingEmployee] = useState(null);
+  console.log("editing-Employee------->",editingEmployee)
   const BackendUrl = process.env.REACT_APP_BACKEND_URL;
 
   const AllEmployee = async() =>{
@@ -34,7 +35,8 @@ const Employee = () => {
 
     try {
       const response = await axios.delete(`${BackendUrl}/deleteEmployee/${id}`);
-      console.log("response ------------------------",response)
+      console.log("response ------------------------>",response)
+      console.log("Deleted Employee ---------------->",response.data.delete_user);
       if(response.status === 200){
         alert("Employee deleted Successfully!")
         setEmployee((prevEmployees)=>prevEmployees.filter((employee)=>employee._id !== id));
@@ -46,16 +48,21 @@ const Employee = () => {
     }
   }
 
+  const editEmployee = (employee)=>{
+        setEditingEmployee(employee);
+        setShowModel(true);
+  }
+
   useEffect(()=>{
     AllEmployee()
   },[]);
 
   const handleSearch = (e) =>{
      const query = e.target.value.toLowerCase();
-     setSearchQuery(query);
+     setSearchQuery(query); 
      console.log("query :",query)
 
-     const filter = employees.filter((person)=> person.name.toLowerCase().includes(query) || person.email.toLowerCase().includes(query) || person.position.toLowerCase().includes(query) || person.department.toLowerCase().includes(query) || person.dateofJoining.toLowerCase().includes(query)|| String(person.phone).includes(query));  
+     const filter = employee.filter((person)=> person.name.toLowerCase().includes(query) || person.email.toLowerCase().includes(query) || person.position.toLowerCase().includes(query) || person.department.toLowerCase().includes(query) || person.dateofJoining.toLowerCase().includes(query)|| String(person.phone).includes(query));  
      setFilteredEmployee(filter)                                           
   }   
     
@@ -93,7 +100,7 @@ const Employee = () => {
             <td>{employee.department}</td>
             <td>{new Date(employee.dateofJoining).toISOString().split("T")[0]}</td>
             <td className='editdelete-btn'>
-                <button className='editEmployee-btn'>Edit</button>
+                <button className='editEmployee-btn' onClick={() => editEmployee(employee)}>Edit</button>
                 <button className='deleteEmployee-btn' onClick={() => DeleteEmployee(employee._id)}>Delete</button>
             </td>   
         </tr>
@@ -114,10 +121,10 @@ const Employee = () => {
             height: "600px",
             maxWidth: "100%",
             width: "900px",
-            borderRadius: "10px",
+            borderRadius: "10px", 
           }}
         >
-          <AddEmployee />
+          <AddEmployee employee={editingEmployee} onClose={()=>{setShowModel(false); AllEmployee();}} />
         </Modal.Body>
       </Modal>
 

@@ -16,7 +16,7 @@ const CreateCandidate = async (req, res) => {
       phone: phone,
       position: position,
       experience: experience,
-      resume: req.file.buffer,
+      resume: req.file.buffer, 
     });
     console.log("data :", data);
     res.status(200).json({message: "New candidate added succesfully",New_candidate: data});

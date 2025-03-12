@@ -18,7 +18,7 @@ const Login = () => {
         `${process.env.REACT_APP_BACKEND_URL}/login`,
         { email, password }
       );
-      alert("Login successful!");
+      // alert("Login successful!");
 
       localStorage.setItem("token", response.data.token);
       console.log('JWT token', response.data.token);
@@ -72,7 +72,7 @@ const Login = () => {
             </button>
 
             <div className="register-link">
-              <p>
+              <p style={{color:"black", fontWeight:"500"}}>
                 Don’t have an account? <Link to="/register">Register</Link>
               </p>
             </div>

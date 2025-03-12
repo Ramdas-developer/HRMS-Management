@@ -2,12 +2,15 @@
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 15px;
-  background-color: #7744d5;
+  background-color: #7919df;
   color: white;
   font-weight: 550;
   width: 100%;
   max-width: 150px;
 }
 .btn-addEmployee:hover{
-  background-color: #9644d5;
+  background-color: #6207a7;
+}
+.employee-search:hover{
+  border: 2px   solid #6207a7 ;
 }
