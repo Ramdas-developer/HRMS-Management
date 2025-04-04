@@ -80,7 +80,7 @@ const Candidate = () => {
         <select>
           <option>All</option>
           <option>Fresher</option>
-          <option>Experienced</option>
+          <option>Experienced</option> 
         </select>
         <div className="nav-end">
           <input

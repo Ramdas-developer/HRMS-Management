@@ -65,4 +65,4 @@ const SignUp = async (req, res) => {
     }
   }
 
-  module.exports = {SignUp,getAdmin,loginAdmin};
+  module.exports = {SignUp,getAdmin,loginAdmin}; 
