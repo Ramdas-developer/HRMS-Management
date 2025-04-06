@@ -8,7 +8,9 @@ const candidateRoute = require("./routes/candidateRoute");
 
 const app = express();
 
-app.use(cors({origin:"*"}));
+// app.use(cors({origin:"*"}));
+app.use(cors({origin:"hrms-management-1df0ll9aa-ramdas-developers-projects.vercel.app"}));
+
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
